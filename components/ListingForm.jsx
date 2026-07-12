@@ -24,7 +24,9 @@ export default function ListingForm({ categories, listing, userId, redirectTo })
     website: listing?.website || '',
     email: listing?.email || '',
     price_range: listing?.price_range || '€€',
-    opening_hours: listing?.opening_hours || ''
+    opening_hours: listing?.opening_hours || '',
+    lat: listing?.lat ?? '',
+    lng: listing?.lng ?? ''
   });
   const [images, setImages] = useState(listing?.images || []);
   const [uploading, setUploading] = useState(false);
@@ -62,6 +64,8 @@ export default function ListingForm({ categories, listing, userId, redirectTo })
 
     const payload = {
       ...form,
+      lat: form.lat === '' ? null : parseFloat(form.lat),
+      lng: form.lng === '' ? null : parseFloat(form.lng),
       category_id: form.category_id || null,
       images,
       owner_id: userId,
@@ -140,6 +144,21 @@ export default function ListingForm({ categories, listing, userId, redirectTo })
           <input value={form.opening_hours} onChange={set('opening_hours')} className="input" placeholder="Mon–Sun 09:00–23:00" />
         </div>
       </div>
+
+      <div className="grid gap-5 md:grid-cols-2">
+        <div>
+          <label className="label">Latitude (for the map)</label>
+          <input value={form.lat} onChange={set('lat')} className="input" placeholder="39.8756" />
+        </div>
+        <div>
+          <label className="label">Longitude</label>
+          <input value={form.lng} onChange={set('lng')} className="input" placeholder="20.0053" />
+        </div>
+      </div>
+      <p className="-mt-3 text-xs text-slate-400">
+        Tip: on Google Maps, right-click your business location and click the coordinates to copy
+        them.
+      </p>
 
       <div>
         <label className="label">Photos (up to 10)</label>

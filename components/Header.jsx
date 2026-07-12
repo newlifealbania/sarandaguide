@@ -18,6 +18,7 @@ export default async function Header() {
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
           <Link href="/listings" className="hover:text-sea-700">Explore</Link>
+          <Link href="/map" className="hover:text-sea-700">Map</Link>
           <Link href="/categories" className="hover:text-sea-700">Categories</Link>
           <Link href="/blog" className="hover:text-sea-700">Travel Guide</Link>
           <Link href="/pricing" className="hover:text-sea-700">For Businesses</Link>

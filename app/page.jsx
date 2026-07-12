@@ -170,14 +170,20 @@ export default async function HomePage() {
 
       {/* 7. Business CTA, last, aimed at owners */}
       <section className="mx-auto max-w-6xl px-4 py-16">
-        <div className="rounded-3xl bg-sea-800 px-8 py-14 text-center text-white">
-          <h2 className="font-display text-3xl font-semibold">Own a business in Saranda?</h2>
-          <p className="mx-auto mt-3 max-w-lg text-sea-100">
-            Get discovered by thousands of travelers. Claim your listing or add a new one in minutes.
-          </p>
-          <Link href="/pricing" className="btn-primary mt-6 !bg-sand-400 hover:!bg-sand-500">
-            List your business
-          </Link>
+        <div
+          className="relative overflow-hidden rounded-3xl bg-sea-800 bg-cover bg-center px-8 py-14 text-center text-white"
+          style={{ backgroundImage: "url('/images/sunset.png')" }}
+        >
+          <div className="absolute inset-0 bg-sea-900/60" />
+          <div className="relative">
+            <h2 className="font-display text-3xl font-semibold">Own a business in Saranda?</h2>
+            <p className="mx-auto mt-3 max-w-lg text-sea-100">
+              Get discovered by thousands of travelers. Claim your listing or add a new one in minutes.
+            </p>
+            <Link href="/pricing" className="btn-primary mt-6 !bg-sand-400 hover:!bg-sand-500">
+              List your business
+            </Link>
+          </div>
         </div>
       </section>
     </>

@@ -25,13 +25,16 @@ function SignInForm() {
     const supabase = createClient();
 
     if (mode === 'sign-up') {
-      const { error: err } = await supabase.auth.signUp({
+      const { data, error: err } = await supabase.auth.signUp({
         email,
         password,
         options: { data: { full_name: fullName } }
       });
       if (err) setError(err.message);
-      else setMessage('Check your email to confirm your account, then sign in.');
+      else if (data.session) {
+        router.push(next);
+        router.refresh();
+      } else setMessage('Check your email to confirm your account, then sign in.');
     } else {
       const { error: err } = await supabase.auth.signInWithPassword({ email, password });
       if (err) setError(err.message);

@@ -2,7 +2,7 @@
 import { useState, useTransition } from 'react';
 import { setListingStatus, resolveClaim, savePost, deletePost } from '../app/admin/actions';
 
-export default function AdminPanel({ pendingListings, pendingClaims, posts, allListings }) {
+export default function AdminPanel({ pendingListings, pendingClaims, posts, allListings, messages = [], subscriberCount = 0 }) {
   const [tab, setTab] = useState('approvals');
   const [isPending, startTransition] = useTransition();
   const [editingPost, setEditingPost] = useState(null);
@@ -10,7 +10,8 @@ export default function AdminPanel({ pendingListings, pendingClaims, posts, allL
   const tabs = [
     { id: 'approvals', label: `Approvals (${pendingListings.length + pendingClaims.length})` },
     { id: 'listings', label: `All listings (${allListings.length})` },
-    { id: 'blog', label: `Blog (${posts.length})` }
+    { id: 'blog', label: `Blog (${posts.length})` },
+    { id: 'inbox', label: `Inbox (${messages.length})` }
   ];
 
   return (
@@ -146,6 +147,38 @@ export default function AdminPanel({ pendingListings, pendingClaims, posts, allL
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* ============ INBOX ============ */}
+      {tab === 'inbox' && (
+        <div className="mt-6">
+          <p className="text-sm text-slate-500">
+            Newsletter subscribers: <strong>{subscriberCount}</strong> (export the full list from
+            Supabase → Table Editor → subscribers)
+          </p>
+          <h2 className="mt-6 font-semibold text-slate-900">Contact messages</h2>
+          {messages.length === 0 && (
+            <p className="mt-2 text-sm text-slate-500">No messages yet.</p>
+          )}
+          <div className="mt-3 space-y-3">
+            {messages.map((m) => (
+              <div key={m.id} className="card p-5">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="font-medium text-slate-900">
+                    {m.name || 'Anonymous'}
+                    <a href={`mailto:${m.email}`} className="ml-2 text-sm font-normal text-sea-700 underline">
+                      {m.email}
+                    </a>
+                  </p>
+                  <span className="text-xs text-slate-400">
+                    {new Date(m.created_at).toLocaleString()}
+                  </span>
+                </div>
+                <p className="mt-2 whitespace-pre-line text-sm text-slate-600">{m.message}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

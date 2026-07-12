@@ -16,8 +16,14 @@ export default async function AdminPage() {
   const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single();
   if (profile?.role !== 'admin') redirect('/dashboard');
 
-  const [{ data: pendingListings }, { data: pendingClaims }, { data: posts }, { data: allListings }] =
-    await Promise.all([
+  const [
+    { data: pendingListings },
+    { data: pendingClaims },
+    { data: posts },
+    { data: allListings },
+    { data: messages },
+    { count: subscriberCount }
+  ] = await Promise.all([
       supabase
         .from('listings')
         .select('*, categories(name), profiles(email, full_name)')
@@ -32,7 +38,9 @@ export default async function AdminPage() {
       supabase
         .from('listings')
         .select('id, name, slug, status, claimed, featured, categories(name)')
-        .order('created_at', { ascending: false })
+        .order('created_at', { ascending: false }),
+      supabase.from('messages').select('*').order('created_at', { ascending: false }).limit(100),
+      supabase.from('subscribers').select('*', { count: 'exact', head: true })
     ]);
 
   return (
@@ -46,6 +54,8 @@ export default async function AdminPage() {
         pendingClaims={pendingClaims || []}
         posts={posts || []}
         allListings={allListings || []}
+        messages={messages || []}
+        subscriberCount={subscriberCount || 0}
       />
     </div>
   );

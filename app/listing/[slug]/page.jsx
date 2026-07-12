@@ -43,8 +43,28 @@ export default async function ListingPage({ params }) {
 
   const images = listing.images || [];
 
+  // Structured data so Google can show rich results for this business
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: listing.name,
+    description: listing.description?.slice(0, 300),
+    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://sarandaguide.com'}/listing/${listing.slug}`,
+    ...(listing.address && { address: { '@type': 'PostalAddress', streetAddress: listing.address, addressLocality: 'Sarandë', addressCountry: 'AL' } }),
+    ...(listing.phone && { telephone: listing.phone }),
+    ...(images[0] && { image: images[0] }),
+    ...(listing.price_range && { priceRange: listing.price_range }),
+    ...(avg && {
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: avg, reviewCount: reviews.length }
+    })
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Breadcrumb */}
       <nav className="text-sm text-slate-500">
         <Link href="/listings" className="hover:text-sea-700">Listings</Link>
