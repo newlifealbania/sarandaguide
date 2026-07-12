@@ -27,13 +27,10 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero */}
+      {/* 1. Hero — search front and center */}
       <section
         className="relative bg-sea-800 bg-cover bg-center text-white"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1665758362878-beff3f919a2b?auto=format&fit=crop&w=1800&q=70')"
-        }}
+        style={{ backgroundImage: "url('/images/hero.jpg')" }}
       >
         <div className="absolute inset-0 bg-sea-900/55" />
         <div className="relative mx-auto max-w-6xl px-4 py-28 text-center">
@@ -53,7 +50,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Categories */}
+      {/* 2. Categories — the fastest path to what visitors want */}
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="font-display text-3xl font-semibold text-slate-900">Browse by category</h2>
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -80,7 +77,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Latest listings */}
+      {/* 3. Latest listings — fresh content, featured first */}
       <section className="bg-sea-50/60">
         <div className="mx-auto max-w-6xl px-4 py-16">
           <div className="flex items-end justify-between">
@@ -97,34 +94,30 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Speak like a local */}
+      {/* 4. Free travel guide — capture interest while it's hot */}
       <section className="mx-auto max-w-6xl px-4 pt-16">
-        <div className="rounded-3xl border border-sand-200 bg-sand-50 px-8 py-10">
-          <p className="text-sm font-semibold uppercase tracking-wide text-sand-500">
-            🇦🇱 Speak like a local
-          </p>
-          <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { sq: 'Përshëndetje!', en: 'Hello!' },
-              { sq: 'Faleminderit', en: 'Thank you' },
-              { sq: 'Sa kushton?', en: 'How much is it?' },
-              { sq: 'Gëzuar!', en: 'Cheers!' }
-            ].map((p) => (
-              <div key={p.sq}>
-                <p className="font-display text-xl font-semibold text-slate-900">{p.sq}</p>
-                <p className="mt-1 text-sm text-slate-500">{p.en}</p>
-              </div>
-            ))}
+        <div className="flex flex-col items-center gap-6 rounded-3xl bg-sea-700 px-8 py-12 text-center text-white md:flex-row md:text-left">
+          <div className="text-6xl">📖</div>
+          <div className="flex-1">
+            <h2 className="font-display text-3xl font-semibold">The free Saranda travel guide</h2>
+            <p className="mt-2 max-w-xl text-sea-100">
+              Beaches, day trips, food, local phrases and insider tips — everything for your trip
+              in one free PDF. No email required.
+            </p>
           </div>
-          <p className="mt-6 text-xs text-slate-400">
-            Tip: locals nod "no" and shake their head for "yes" — don't let it confuse you!
-          </p>
+          <a
+            href="/saranda-travel-guide.pdf"
+            download
+            className="btn-primary !bg-sand-400 hover:!bg-sand-500"
+          >
+            Download free guide
+          </a>
         </div>
       </section>
 
-      {/* Blog */}
+      {/* 5. Blog — depth for planners, great for SEO */}
       {posts?.length > 0 && (
-        <section className="mx-auto max-w-6xl px-4 py-16">
+        <section className="mx-auto max-w-6xl px-4 pt-16">
           <div className="flex items-end justify-between">
             <h2 className="font-display text-3xl font-semibold text-slate-900">Travel guide</h2>
             <Link href="/blog" className="text-sm font-semibold text-sea-700 hover:underline">
@@ -150,8 +143,33 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Business CTA */}
-      <section className="mx-auto max-w-6xl px-4 pb-16">
+      {/* 6. Speak like a local — charm before the goodbye */}
+      <section className="mx-auto max-w-6xl px-4 pt-16">
+        <div className="rounded-3xl border border-sand-200 bg-sand-50 px-8 py-10">
+          <p className="text-sm font-semibold uppercase tracking-wide text-sand-500">
+            🇦🇱 Speak like a local
+          </p>
+          <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { sq: 'Përshëndetje!', en: 'Hello!' },
+              { sq: 'Faleminderit', en: 'Thank you' },
+              { sq: 'Sa kushton?', en: 'How much is it?' },
+              { sq: 'Gëzuar!', en: 'Cheers!' }
+            ].map((p) => (
+              <div key={p.sq}>
+                <p className="font-display text-xl font-semibold text-slate-900">{p.sq}</p>
+                <p className="mt-1 text-sm text-slate-500">{p.en}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-slate-400">
+            Tip: locals nod "no" and shake their head for "yes" — don't let it confuse you!
+          </p>
+        </div>
+      </section>
+
+      {/* 7. Business CTA — last, aimed at owners */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
         <div className="rounded-3xl bg-sea-800 px-8 py-14 text-center text-white">
           <h2 className="font-display text-3xl font-semibold">Own a business in Saranda?</h2>
           <p className="mx-auto mt-3 max-w-lg text-sea-100">
