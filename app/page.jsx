@@ -1,0 +1,122 @@
+import Link from 'next/link';
+import { createClient } from '../lib/supabase/server';
+import ListingCard from '../components/ListingCard';
+import SearchBar from '../components/SearchBar';
+
+export const revalidate = 300;
+
+export default async function HomePage() {
+  const supabase = await createClient();
+
+  const [{ data: categories }, { data: listings }, { data: posts }] = await Promise.all([
+    supabase.from('categories').select('*').order('sort_order').limit(8),
+    supabase
+      .from('listings')
+      .select('*, categories(name, slug)')
+      .eq('status', 'published')
+      .order('featured', { ascending: false })
+      .order('created_at', { ascending: false })
+      .limit(6),
+    supabase
+      .from('posts')
+      .select('title, slug, excerpt, cover_image, created_at')
+      .eq('published', true)
+      .order('created_at', { ascending: false })
+      .limit(3)
+  ]);
+
+  return (
+    <>
+      {/* Hero */}
+      <section className="bg-gradient-to-b from-sea-800 to-sea-600 text-white">
+        <div className="mx-auto max-w-6xl px-4 py-24 text-center">
+          <h1 className="font-display text-4xl font-semibold md:text-6xl">
+            Discover the best of Saranda
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-lg text-sea-100">
+            Restaurants, beaches, hotels and things to do on the Albanian Riviera —
+            curated by locals.
+          </p>
+          <div className="mx-auto mt-8 max-w-xl">
+            <SearchBar />
+          </div>
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <h2 className="font-display text-3xl font-semibold text-slate-900">Browse by category</h2>
+        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+          {(categories || []).map((cat) => (
+            <Link
+              key={cat.id}
+              href={`/category/${cat.slug}`}
+              className="card flex flex-col justify-between p-5 hover:border-sea-300"
+            >
+              <h3 className="font-semibold text-slate-900">{cat.name}</h3>
+              <p className="mt-2 line-clamp-2 text-sm text-slate-500">{cat.description}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Latest listings */}
+      <section className="bg-sea-50/60">
+        <div className="mx-auto max-w-6xl px-4 py-16">
+          <div className="flex items-end justify-between">
+            <h2 className="font-display text-3xl font-semibold text-slate-900">Latest places</h2>
+            <Link href="/listings" className="text-sm font-semibold text-sea-700 hover:underline">
+              View all →
+            </Link>
+          </div>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {(listings || []).map((l) => (
+              <ListingCard key={l.id} listing={l} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Blog */}
+      {posts?.length > 0 && (
+        <section className="mx-auto max-w-6xl px-4 py-16">
+          <div className="flex items-end justify-between">
+            <h2 className="font-display text-3xl font-semibold text-slate-900">Travel guide</h2>
+            <Link href="/blog" className="text-sm font-semibold text-sea-700 hover:underline">
+              All articles →
+            </Link>
+          </div>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {posts.map((post) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="card group block">
+                {post.cover_image && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={post.cover_image} alt="" className="h-44 w-full object-cover" />
+                )}
+                <div className="p-4">
+                  <h3 className="font-semibold text-slate-900 group-hover:text-sea-700">
+                    {post.title}
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-sm text-slate-500">{post.excerpt}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Business CTA */}
+      <section className="mx-auto max-w-6xl px-4 pb-16">
+        <div className="rounded-3xl bg-sea-800 px-8 py-14 text-center text-white">
+          <h2 className="font-display text-3xl font-semibold">Own a business in Saranda?</h2>
+          <p className="mx-auto mt-3 max-w-lg text-sea-100">
+            Get discovered by thousands of travelers. Claim your listing or add a new one in minutes.
+          </p>
+          <Link href="/pricing" className="btn-primary mt-6 !bg-sand-400 hover:!bg-sand-500">
+            List your business
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+}
