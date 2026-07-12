@@ -31,7 +31,8 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-sea-800 py-5 text-center text-xs text-sea-300">
-        © {new Date().getFullYear()} SarandaGuide.com — All rights reserved.
+        <p>Faleminderit për vizitën — thanks for visiting! 🇦🇱</p>
+        <p className="mt-1">© {new Date().getFullYear()} SarandaGuide.com — All rights reserved.</p>
       </div>
     </footer>
   );

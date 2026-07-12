@@ -37,6 +37,9 @@ export default async function HomePage() {
       >
         <div className="absolute inset-0 bg-sea-900/55" />
         <div className="relative mx-auto max-w-6xl px-4 py-28 text-center">
+          <p className="mb-3 text-lg font-medium text-sand-200">
+            Mirë se vini në Sarandë! 🇦🇱
+          </p>
           <h1 className="font-display text-4xl font-semibold md:text-6xl">
             Discover the best of Saranda
           </h1>
@@ -91,6 +94,31 @@ export default async function HomePage() {
               <ListingCard key={l.id} listing={l} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Speak like a local */}
+      <section className="mx-auto max-w-6xl px-4 pt-16">
+        <div className="rounded-3xl border border-sand-200 bg-sand-50 px-8 py-10">
+          <p className="text-sm font-semibold uppercase tracking-wide text-sand-500">
+            🇦🇱 Speak like a local
+          </p>
+          <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { sq: 'Përshëndetje!', en: 'Hello!' },
+              { sq: 'Faleminderit', en: 'Thank you' },
+              { sq: 'Sa kushton?', en: 'How much is it?' },
+              { sq: 'Gëzuar!', en: 'Cheers!' }
+            ].map((p) => (
+              <div key={p.sq}>
+                <p className="font-display text-xl font-semibold text-slate-900">{p.sq}</p>
+                <p className="mt-1 text-sm text-slate-500">{p.en}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-slate-400">
+            Tip: locals nod "no" and shake their head for "yes" — don't let it confuse you!
+          </p>
         </div>
       </section>
 
