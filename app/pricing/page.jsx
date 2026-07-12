@@ -82,7 +82,7 @@ export default function PricingPage() {
           Is your business already listed?
         </h3>
         <p className="mx-auto mt-2 max-w-lg text-sm text-slate-600">
-          Find your listing and click "Claim it" — once approved, you choose a plan and take
+          Find your listing and click "Claim it", once approved, you choose a plan and take
           control of your page.
         </p>
         <Link href="/listings" className="btn-secondary mt-5">

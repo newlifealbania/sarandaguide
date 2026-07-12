@@ -12,7 +12,7 @@ export default function PrivacyPage() {
         <p>
           <strong>What we collect.</strong> When you create an account we store your name and
           email address. When you list a business we store the business details you provide.
-          Payments are processed by Stripe — we never see or store your card details.
+          Payments are processed by Lemon Squeezy. We never see or store your card details.
         </p>
         <p>
           <strong>How we use it.</strong> We use your data only to operate the directory: showing

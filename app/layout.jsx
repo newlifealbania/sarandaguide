@@ -9,7 +9,7 @@ const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-display' });
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: {
-    default: 'Saranda Guide — Discover the Best of Saranda, Albania',
+    default: 'Saranda Guide | Discover the Best of Saranda, Albania',
     template: '%s | Saranda Guide'
   },
   description:

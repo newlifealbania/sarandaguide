@@ -230,7 +230,7 @@ function PostEditor({ post, onDone }) {
         <input name="cover_image" defaultValue={post?.cover_image} className="input" placeholder="https://…" />
       </div>
       <div>
-        <label className="label">Content (Markdown — # headings, **bold**, [links](url))</label>
+        <label className="label">Content (Markdown, # headings, **bold**, [links](url))</label>
         <textarea name="content" defaultValue={post?.content} rows={12} className="input font-mono text-xs" />
       </div>
       <label className="flex items-center gap-2 text-sm text-slate-700">

@@ -21,7 +21,7 @@ export default async function NewListingPage({ searchParams }) {
     <div className="mx-auto max-w-2xl px-4 py-12">
       <h1 className="font-display text-3xl font-semibold text-slate-900">Add your business</h1>
       <p className="mt-2 text-sm text-slate-500">
-        Step 1 of 2 — tell us about your business. You'll choose your plan next.
+        Step 1 of 2, tell us about your business. You'll choose your plan next.
       </p>
       <div className="mt-8">
         <ListingForm

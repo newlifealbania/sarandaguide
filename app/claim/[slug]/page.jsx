@@ -39,7 +39,7 @@ export default async function ClaimPage({ params }) {
         </p>
       ) : existingClaim ? (
         <p className="mt-4 text-slate-600">
-          You've already submitted a claim for this listing — status:{' '}
+          You've already submitted a claim for this listing, status:{' '}
           <strong>{existingClaim.status}</strong>. We'll email you once it's reviewed.
         </p>
       ) : (

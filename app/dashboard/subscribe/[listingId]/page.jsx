@@ -29,7 +29,7 @@ export default async function SubscribePage({ params, searchParams }) {
         Choose a plan for {listing.name}
       </h1>
       <p className="mt-2 text-sm text-slate-500">
-        Step 2 of 2 — your listing goes live once payment is complete and it's approved.
+        Step 2 of 2, your listing goes live once payment is complete and it's approved.
       </p>
       <div className="mt-8">
         <PlanPicker listingId={listing.id} preselect={preselect} />

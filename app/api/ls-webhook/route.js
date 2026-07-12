@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import { NextResponse } from 'next/server';
 import { createAdminClient } from '../../../lib/supabase/server';
 
-// Lemon Squeezy webhook — keeps subscriptions and listings in sync
+// Lemon Squeezy webhook, keeps subscriptions and listings in sync
 export async function POST(request) {
   const rawBody = await request.text();
 
@@ -43,7 +43,7 @@ export async function POST(request) {
 
   // Keep the listing in sync with the subscription
   if (custom.listing_id) {
-    // 'cancelled' still has paid time left — access ends at 'expired'
+    // 'cancelled' still has paid time left, access ends at 'expired'
     const hasAccess = ['active', 'on_trial', 'past_due', 'cancelled'].includes(attrs.status);
     if (hasAccess) {
       await supabase

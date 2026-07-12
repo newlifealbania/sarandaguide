@@ -44,7 +44,7 @@ export default function ClaimForm({ listingId, userId }) {
           onChange={(e) => setMessage(e.target.value)}
           rows={4}
           className="input"
-          placeholder="e.g. I'm the owner — you can verify by calling the number on our website…"
+          placeholder="e.g. I'm the owner, you can verify by calling the number on our website…"
           required
         />
       </div>

@@ -9,7 +9,7 @@ export default function Footer() {
             Saranda<span className="text-sand-400">Guide</span>
           </p>
           <p className="mt-3 max-w-sm text-sm text-sea-200">
-            The local guide to Saranda and the Albanian Riviera — made for Saranda lovers.
+            The local guide to Saranda and the Albanian Riviera, made for Saranda lovers.
             Find your next favorite place today.
           </p>
         </div>
@@ -27,12 +27,13 @@ export default function Footer() {
             <li><Link href="/pricing" className="hover:text-white">Add your business</Link></li>
             <li><Link href="/sign-in" className="hover:text-white">Sign in</Link></li>
             <li><Link href="/privacy" className="hover:text-white">Privacy policy</Link></li>
+            <li><Link href="/disclaimer" className="hover:text-white">Disclaimer</Link></li>
           </ul>
         </div>
       </div>
       <div className="border-t border-sea-800 py-5 text-center text-xs text-sea-300">
-        <p>Faleminderit për vizitën — thanks for visiting! 🇦🇱</p>
-        <p className="mt-1">© {new Date().getFullYear()} SarandaGuide.com — All rights reserved.</p>
+        <p>Faleminderit për vizitën, thanks for visiting! 🇦🇱</p>
+        <p className="mt-1">© {new Date().getFullYear()} SarandaGuide.com. All rights reserved.</p>
       </div>
     </footer>
   );
