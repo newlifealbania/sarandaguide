@@ -28,8 +28,15 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-b from-sea-800 to-sea-600 text-white">
-        <div className="mx-auto max-w-6xl px-4 py-24 text-center">
+      <section
+        className="relative bg-sea-800 bg-cover bg-center text-white"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1665758362878-beff3f919a2b?auto=format&fit=crop&w=1800&q=70')"
+        }}
+      >
+        <div className="absolute inset-0 bg-sea-900/55" />
+        <div className="relative mx-auto max-w-6xl px-4 py-28 text-center">
           <h1 className="font-display text-4xl font-semibold md:text-6xl">
             Discover the best of Saranda
           </h1>
@@ -51,10 +58,20 @@ export default async function HomePage() {
             <Link
               key={cat.id}
               href={`/category/${cat.slug}`}
-              className="card flex flex-col justify-between p-5 hover:border-sea-300"
+              className="card group relative block h-40 overflow-hidden"
             >
-              <h3 className="font-semibold text-slate-900">{cat.name}</h3>
-              <p className="mt-2 line-clamp-2 text-sm text-slate-500">{cat.description}</p>
+              {cat.image_url ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={cat.image_url}
+                  alt={cat.name}
+                  className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-sea-100" />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-sea-900/80 via-sea-900/20 to-transparent" />
+              <h3 className="absolute bottom-3 left-4 font-semibold text-white">{cat.name}</h3>
             </Link>
           ))}
         </div>
