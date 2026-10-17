@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.globalbound.twa",
+    "sha256_cert_fingerprints": ["25:68:7C:90:B0:1D:ED:B1:94:7A:AD:B2:53:90:6B:C7:F1:22:37:CA:E4:5D:D0:3D:3E:27:27:FC:46:96:7D:D9"]
+  }
+}]
